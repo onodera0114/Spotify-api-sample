@@ -12,5 +12,10 @@ const vitestConfig = defineVitestConfig({
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
   ...vitestConfig,
 });
