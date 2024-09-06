@@ -26,6 +26,7 @@ export const App = (): JSX.Element => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div>
+        <h1>{import.meta.env.VITE_APP_TITLE}</h1>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
