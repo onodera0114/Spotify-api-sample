@@ -6,7 +6,7 @@ const vitestConfig = defineVitestConfig({
   test: {
     environment: "happy-dom",
     globals: true,
-    setupFiles: "./vitest.setup.ts",
+    setupFiles: "/src/test/vitest.setup.ts",
   },
 });
 
