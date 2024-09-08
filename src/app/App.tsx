@@ -1,6 +1,7 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { AppRouter } from "./router";
+import { AppRouter } from "@/app/Router";
+import { AppProvider } from "./Provider";
 
 export const App = (): JSX.Element => {
   const theme = createTheme({
@@ -21,7 +22,9 @@ export const App = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppRouter />
+      <AppProvider>
+        <AppRouter />
+      </AppProvider>
     </ThemeProvider>
   );
 };
