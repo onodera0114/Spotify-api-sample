@@ -1,3 +1,4 @@
+import { getAccessToken } from "@/features/token/api/accessToken";
 import Axios, { InternalAxiosRequestConfig } from "axios";
 
 const authRequestInterceptor = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
@@ -11,9 +12,22 @@ export const authApi = Axios.create({
 authApi.interceptors.request.use(authRequestInterceptor);
 authApi.interceptors.response.use(
   (response) => {
-    return response.data;
+    return response;
   },
-  (error) => {
+  async (error) => {
+    if (error.response && error.response.status === 401) {
+      try {
+        const response = await getAccessToken();
+        const newToken = response.access_token;
+        localStorage.setItem("token", newToken);
+
+        // 新しいトークンをヘッダーに設定して再度リクエストを送る
+        error.config.headers["Authorization"] = `Bearer ${newToken}`;
+        return Axios.request(error.config);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
+    }
     return Promise.reject(error);
   }
 );
@@ -28,9 +42,22 @@ export const api = Axios.create({
 api.interceptors.request.use(requestInterceptor);
 api.interceptors.response.use(
   (response) => {
-    return response.data;
+    return response;
   },
-  (error) => {
+  async (error) => {
+    if (error.response && error.response.status === 401) {
+      try {
+        const response = await getAccessToken();
+        const newToken = response.access_token;
+        localStorage.setItem("token", newToken);
+
+        // 新しいトークンをヘッダーに設定して再度リクエストを送る
+        error.config.headers["Authorization"] = `Bearer ${newToken}`;
+        return await api.request(error.config);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
+    }
     return Promise.reject(error);
   }
 );
