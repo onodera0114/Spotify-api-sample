@@ -15,19 +15,6 @@ authApi.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response && error.response.status === 401) {
-      try {
-        const response = await getAccessToken();
-        const newToken = response.access_token;
-        localStorage.setItem("token", newToken);
-
-        // 新しいトークンをヘッダーに設定して再度リクエストを送る
-        error.config.headers["Authorization"] = `Bearer ${newToken}`;
-        return Axios.request(error.config);
-      } catch (refreshError) {
-        return Promise.reject(refreshError);
-      }
-    }
     return Promise.reject(error);
   }
 );
