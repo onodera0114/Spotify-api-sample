@@ -19,7 +19,7 @@
  * @property {number} duration_ms - トラックの長さ（ミリ秒）。
  * @property {number} time_signature - トラックの拍子記号。
  */
-export type TrackAudioFeatures = {
+export type TrackAudioFeaturesResponse = {
   danceability: number;
   energy: number;
   key: number;
