@@ -4,6 +4,7 @@ import { useParams, LoaderFunctionArgs } from "react-router-dom";
 
 import { getTrackQueryOptions, useTrack } from "@/features/track/api/getTrack";
 import { TrackResponse } from "@/types/track";
+import { getTrackAudioFeaturesOptions, useTrackAudioFeatures } from "@/features/track/api/getTrackAudioFeatures";
 
 export const trackLoader =
   (queryClient: QueryClient) =>
@@ -11,8 +12,20 @@ export const trackLoader =
       const trackId = params.trackId as string;
 
       const trackQuery = getTrackQueryOptions(trackId);
+      const trackAudioFeaturesQuery = getTrackAudioFeaturesOptions(trackId);
 
-      return queryClient.getQueryData(trackQuery.queryKey as QueryKey) ?? (await queryClient.fetchQuery(trackQuery as FetchQueryOptions));
+      const promises = [
+        queryClient.getQueryData(trackQuery.queryKey as QueryKey) ?? (await queryClient.fetchQuery(trackQuery as FetchQueryOptions)),
+        queryClient.getQueryData(trackAudioFeaturesQuery.queryKey as QueryKey) ??
+        (await queryClient.fetchQuery(trackAudioFeaturesQuery as FetchQueryOptions)),
+      ] as const;
+
+      const [track, trackAudioFeatures] = await Promise.all(promises);
+
+      return {
+        track,
+        trackAudioFeatures,
+      };
     };
 
 export const Track = (): JSX.Element | null => {
@@ -21,8 +34,11 @@ export const Track = (): JSX.Element | null => {
   const trackQuery = useTrack({
     trackId,
   });
+  const trackAudioFeaturesQuery = useTrackAudioFeatures({
+    trackId,
+  });
 
-  if (trackQuery.isLoading) {
+  if (trackQuery.isLoading && trackAudioFeaturesQuery.isLoading) {
     return (
       <div>
         <p>ローディング</p>
@@ -31,8 +47,9 @@ export const Track = (): JSX.Element | null => {
   }
 
   const track = trackQuery.data;
+  const audioFeatures = trackAudioFeaturesQuery.data;
 
-  if (!track) return null;
+  if (!track || !audioFeatures) return null;
 
   return (
     <>
@@ -40,6 +57,7 @@ export const Track = (): JSX.Element | null => {
         <ErrorBoundary fallback={<div>Failed to load comments. Try to refresh the page.</div>}>
           <div>曲詳細</div>
           <div>{JSON.stringify(track)}</div>
+          <div>{JSON.stringify(audioFeatures)}</div>
         </ErrorBoundary>
       </div>
     </>
