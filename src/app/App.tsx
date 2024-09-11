@@ -9,12 +9,13 @@ export const App = (): JSX.Element => {
       button: {
         textTransform: "none",
       },
+      allVariants: {
+        color: "#222",
+      },
     },
     palette: {
       primary: {
-        light: "#64b5f6",
-        main: "#2196f3",
-        dark: "#1976d2",
+        main: "#2ebd59",
       },
     },
   });
