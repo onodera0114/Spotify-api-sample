@@ -55,9 +55,27 @@ export const Track = (): JSX.Element | null => {
     <>
       <div>
         <ErrorBoundary fallback={<div>Failed to load comments. Try to refresh the page.</div>}>
-          <div>曲詳細</div>
-          <div>{JSON.stringify(track)}</div>
-          <div>{JSON.stringify(audioFeatures)}</div>
+          <h3>曲詳細</h3>
+          <div style={{ textAlign: "center" }}>
+            <img src={track.album.images[0].url} alt="" />
+          </div>
+          <div>{track.name}</div>
+          <div>
+            {Object.entries(track).map(([key, value]) => (
+              <dl key={key}>
+                <dt>{key}</dt>
+                <dd>{typeof value === "object" ? JSON.stringify(value) : value}</dd>
+              </dl>
+            ))}
+          </div>
+          <div>
+            {Object.entries(audioFeatures).map(([key, value]) => (
+              <dl key={key}>
+                <dt>{key}</dt>
+                <dd>{typeof value === "object" ? JSON.stringify(value) : value}</dd>
+              </dl>
+            ))}
+          </div>
         </ErrorBoundary>
       </div>
     </>
