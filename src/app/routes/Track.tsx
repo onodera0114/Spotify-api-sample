@@ -56,7 +56,7 @@ export const Track = (): JSX.Element | null => {
       <div>
         <ErrorBoundary fallback={<div>Failed to load comments. Try to refresh the page.</div>}>
           <h3>曲詳細</h3>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", width: "320px", height: "320px" }}>
             <img src={track.album.images[0].url} alt="" />
           </div>
           <div>{track.name}</div>
