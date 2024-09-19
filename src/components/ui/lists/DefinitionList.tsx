@@ -67,6 +67,8 @@ const CreateList = (props: { item: ListItems }): JSX.Element => {
         <ListItem key={item.key}>
           {DefinitionTeam(item.teamText)}
           {DefinitionDescription(item.descriptionText)}
+          {/* リストをそろえるためにvisibility: "hidden"を指定 */}
+          <ExpandLess sx={{ visibility: "hidden" }} />
         </ListItem>
       )}
     </>
