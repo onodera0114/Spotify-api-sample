@@ -10,7 +10,7 @@ type Props = {
   track: TrackResponse;
 };
 
-export const TrackInfomation = (props: Props): JSX.Element => {
+export const TrackInfomation: React.FC<Props> = (props: Props): JSX.Element => {
   const { track } = props;
 
   const createListData = (track: TrackResponse): ListItems[] => {
