@@ -7,6 +7,7 @@ import { TrackResponse } from "@/types/track";
 import { getTrackAudioFeaturesOptions, useTrackAudioFeatures } from "@/features/track/api/getTrackAudioFeatures";
 import { TrackInfomation } from "@/features/track/components/TrackInfomation";
 import { Loading } from "@/components/layouts/Loading";
+import { FeaturesInfomation } from "@/features/track/components/FeaturesInfomation";
 
 export const trackLoader =
   (queryClient: QueryClient) =>
@@ -55,14 +56,7 @@ export const Track = (): JSX.Element | null => {
         <ErrorBoundary fallback={<div>Failed to load comments. Try to refresh the page.</div>}>
           <h3>曲詳細</h3>
           <TrackInfomation track={track} />
-          <div>
-            {Object.entries(audioFeatures).map(([key, value]) => (
-              <dl key={key}>
-                <dt>{key}</dt>
-                <dd>{typeof value === "object" ? JSON.stringify(value) : value}</dd>
-              </dl>
-            ))}
-          </div>
+          <FeaturesInfomation features={audioFeatures} />
         </ErrorBoundary>
       </div>
     </>
