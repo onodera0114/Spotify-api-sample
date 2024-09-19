@@ -5,6 +5,8 @@ import { useParams, LoaderFunctionArgs } from "react-router-dom";
 import { getTrackQueryOptions, useTrack } from "@/features/track/api/getTrack";
 import { TrackResponse } from "@/types/track";
 import { getTrackAudioFeaturesOptions, useTrackAudioFeatures } from "@/features/track/api/getTrackAudioFeatures";
+import { TrackInfomation } from "@/features/track/components/TrackInfomation";
+import { Loading } from "@/components/layouts/Loading";
 
 export const trackLoader =
   (queryClient: QueryClient) =>
@@ -39,11 +41,7 @@ export const Track = (): JSX.Element | null => {
   });
 
   if (trackQuery.isLoading && trackAudioFeaturesQuery.isLoading) {
-    return (
-      <div>
-        <p>ローディング</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   const track = trackQuery.data;
@@ -56,18 +54,7 @@ export const Track = (): JSX.Element | null => {
       <div>
         <ErrorBoundary fallback={<div>Failed to load comments. Try to refresh the page.</div>}>
           <h3>曲詳細</h3>
-          <div style={{ textAlign: "center" }}>
-            <img src={track.album.images[0].url} alt="" style={{ width: "320px", height: "320px" }} />
-          </div>
-          <div>{track.name}</div>
-          <div>
-            {Object.entries(track).map(([key, value]) => (
-              <dl key={key}>
-                <dt>{key}</dt>
-                <dd>{typeof value === "object" ? JSON.stringify(value) : value}</dd>
-              </dl>
-            ))}
-          </div>
+          <TrackInfomation track={track} />
           <div>
             {Object.entries(audioFeatures).map(([key, value]) => (
               <dl key={key}>
