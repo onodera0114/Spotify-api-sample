@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Collapse, Divider, List, ListItem, ListItemButton, ListItemText, ListSubheader } from "@mui/material";
+import { Collapse, Divider, List, ListItem, ListItemButton, ListItemText, ListSubheader, Typography } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
@@ -56,7 +56,7 @@ const CreateList = (props: { item: ListItems }): JSX.Element => {
     <>
       {item.noteText ? (
         <>
-          <ListItemButton key={item.key} onClick={handleClick}>
+          <ListItemButton key={item.key} component="li" onClick={handleClick}>
             {DefinitionTeam(item.teamText)}
             {DefinitionDescription(item.descriptionText)}
             {open ? <ExpandLess /> : <ExpandMore />}
@@ -86,7 +86,9 @@ export const DefinitionList: React.FC<Props> = (props: Props) => {
       subheader={
         subHeader && (
           <ListSubheader component="div" id="nested-list-subheader">
-            {subHeader}
+            <Typography variant="h6" component="h3" sx={{ fontWeight: "bold" }}>
+              {subHeader}
+            </Typography>
           </ListSubheader>
         )
       }
