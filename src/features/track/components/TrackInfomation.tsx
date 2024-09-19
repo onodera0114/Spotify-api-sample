@@ -174,7 +174,7 @@ export const TrackInfomation: React.FC<Props> = (props: Props): JSX.Element => {
         <div style={{ textAlign: "center" }}>
           <img src={track.album.images[0].url} alt="" style={{ width: "320px", height: "320px" }} />
         </div>
-        <div>
+        <Stack spacing={1} sx={{ justifyContent: "center", alignItems: "center" }}>
           <Typography variant="h6" component="h2" sx={{ fontWeight: "bold" }}>
             {track.name}
           </Typography>
@@ -190,7 +190,7 @@ export const TrackInfomation: React.FC<Props> = (props: Props): JSX.Element => {
               </Link>
             )}
           </Stack>
-        </div>
+        </Stack>
       </Stack>
       <DefinitionList listItems={createListData(track)} />
     </>
