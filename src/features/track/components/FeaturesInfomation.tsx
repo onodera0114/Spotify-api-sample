@@ -1,7 +1,6 @@
 import { DefinitionList, ListItems } from "@/components/ui/lists/DefinitionList";
 import { audioFeaturesKeyList } from "@/config/keyList";
 import { TrackAudioFeaturesResponse } from "@/types/trackAuditFeatures";
-import { Typography } from "@mui/material";
 
 type Props = {
   features: TrackAudioFeaturesResponse;
@@ -24,12 +23,5 @@ export const FeaturesInfomation: React.FC<Props> = (props: Props): JSX.Element =
     return listItems;
   };
 
-  return (
-    <>
-      <Typography variant="h6" component="h3" sx={{ fontWeight: "bold" }}>
-        曲の特徴
-      </Typography>
-      <DefinitionList listItems={createListData(features)} />
-    </>
-  );
+  return <DefinitionList listItems={createListData(features)} subHeader="曲の特徴" />;
 };

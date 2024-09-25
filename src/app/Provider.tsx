@@ -4,6 +4,7 @@ import * as React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { queryConfig } from "@/lib/reactQuery";
 import { MainError } from "@/components/errors/Main";
+import { Loading } from "@/components/layouts/Loading";
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -18,13 +19,7 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
   );
 
   return (
-    <React.Suspense
-      fallback={
-        <div>
-          <p>ローディング</p>
-        </div>
-      }
-    >
+    <React.Suspense fallback={<Loading />}>
       <ErrorBoundary FallbackComponent={MainError}>
         <QueryClientProvider client={queryClient}>
           {import.meta.env.DEV && <ReactQueryDevtools />}
