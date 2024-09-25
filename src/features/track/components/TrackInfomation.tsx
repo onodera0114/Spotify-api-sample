@@ -3,8 +3,8 @@ import { DefinitionList, ListItems } from "@/components/ui/lists/DefinitionList"
 import { trackKeyList } from "@/config/keyList";
 import { TrackResponse } from "@/types/track";
 import { convertMs } from "@/utils/convertMs";
-import { Link, Stack, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "@/components/ui/links/Link";
+import { Stack, Typography } from "@mui/material";
 
 type Props = {
   track: TrackResponse;
@@ -24,7 +24,7 @@ export const TrackInfomation: React.FC<Props> = (props: Props): JSX.Element => {
             key: item.key,
             teamText: item.teamText,
             descriptionText: (
-              <Link component={RouterLink} to={track.external_urls.spotify} target="_blank" rel="noreferrer" sx={{ width: "fit-content" }}>
+              <Link to={track.external_urls.spotify} target="_blank" rel="noreferrer" sx={{ width: "fit-content" }}>
                 {track.name}
               </Link>
             ),
@@ -50,7 +50,7 @@ export const TrackInfomation: React.FC<Props> = (props: Props): JSX.Element => {
             key: item.key,
             teamText: track.album.album_type === "single" ? "シングル名" : track.album.album_type === "album" ? "アルバム名" : "コンピレーション名",
             descriptionText: (
-              <Link component={RouterLink} to={track.album.external_urls.spotify} target="_blank" rel="noreferrer" sx={{ width: "fit-content" }}>
+              <Link to={track.album.external_urls.spotify} target="_blank" rel="noreferrer" sx={{ width: "fit-content" }}>
                 {track.album.name}
               </Link>
             ),
@@ -78,14 +78,7 @@ export const TrackInfomation: React.FC<Props> = (props: Props): JSX.Element => {
             descriptionText: (
               <Stack>
                 {track.artists.map((artist) => (
-                  <Link
-                    key={artist.id}
-                    component={RouterLink}
-                    to={artist.external_urls.spotify}
-                    target="_blank"
-                    rel="noreferrer"
-                    sx={{ width: "fit-content" }}
-                  >
+                  <Link key={artist.id} to={artist.external_urls.spotify} target="_blank" rel="noreferrer" sx={{ width: "fit-content" }}>
                     {artist.name}
                   </Link>
                 ))}
@@ -102,7 +95,7 @@ export const TrackInfomation: React.FC<Props> = (props: Props): JSX.Element => {
           noteTitle: item.noteTitle ?? "",
           noteText: (
             <>
-              <Link component={RouterLink} to="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank" rel="noreferrer">
+              <Link to="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank" rel="noreferrer">
                   ISO 3166-1 alpha-2 code
               </Link>
                 で表示しています
@@ -180,12 +173,12 @@ export const TrackInfomation: React.FC<Props> = (props: Props): JSX.Element => {
           </Typography>
           <Stack direction={"row"} spacing={2} sx={{ justifyContent: "center", alignItems: "center" }}>
             {track.uri && (
-              <Link component={RouterLink} to={track.uri}>
+              <Link to={track.uri}>
                 <Button buttonProps={{ variant: "contained" }}>アプリで開く</Button>
               </Link>
             )}
             {track.external_urls.spotify && (
-              <Link component={RouterLink} to={track.external_urls.spotify} target="_blank" rel="noreferrer">
+              <Link to={track.external_urls.spotify} target="_blank" rel="noreferrer">
                 <Button buttonProps={{ variant: "outlined" }}>ブラウザで開く</Button>
               </Link>
             )}
