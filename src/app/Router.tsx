@@ -1,9 +1,10 @@
 import { useMemo } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { LoaderFunctionArgs, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Root } from "@/app/routes/Root";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 
 // export const createAppRouter = (queryClient: QueryClient): ReturnType<typeof createBrowserRouter> =>
-export const createAppRouter = (): ReturnType<typeof createBrowserRouter> =>
+export const createAppRouter = (queryClient: QueryClient): ReturnType<typeof createBrowserRouter> =>
   createBrowserRouter([
     {
       path: "/",
@@ -48,6 +49,10 @@ export const createAppRouter = (): ReturnType<typeof createBrowserRouter> =>
             const { Track } = await import("@/app/routes/Track");
             return { Component: Track };
           },
+          loader: async (args: LoaderFunctionArgs): Promise<unknown> => {
+            const { trackLoader } = await import("@/app/routes/Track");
+            return trackLoader(queryClient)(args);
+          },
         },
       ],
     },
@@ -61,7 +66,8 @@ export const createAppRouter = (): ReturnType<typeof createBrowserRouter> =>
   ]);
 
 export const AppRouter = (): JSX.Element => {
-  const router = useMemo(() => createAppRouter(), []);
+  const queryClient = useQueryClient();
+  const router = useMemo(() => createAppRouter(queryClient), [queryClient]);
 
   return <RouterProvider router={router} />;
 };
