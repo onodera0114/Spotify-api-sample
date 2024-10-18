@@ -1,7 +1,11 @@
+import { Typography } from "@mui/material";
+
 export const SearchTrack = (): JSX.Element => {
   return (
     <>
-      <h1>曲検索</h1>
+      <Typography variant="h4" component="h1" sx={{ fontWeight: "bold", flexGrow: 1, my: 2 }}>
+        曲検索
+      </Typography>
     </>
   );
 };
