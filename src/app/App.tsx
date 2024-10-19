@@ -5,6 +5,13 @@ import { AppProvider } from "./Provider";
 
 export const App = (): JSX.Element => {
   const theme = createTheme({
+    components: {
+      MuiStack: {
+        defaultProps: {
+          useFlexGap: true,
+        },
+      },
+    },
     typography: {
       button: {
         textTransform: "none",

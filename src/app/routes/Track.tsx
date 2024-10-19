@@ -1,7 +1,7 @@
 import { FetchQueryOptions, QueryClient, QueryKey } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { useParams, LoaderFunctionArgs } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { getTrackQueryOptions, useTrack } from "@/features/track/api/getTrack";
 import { TrackResponse } from "@/types/track";
@@ -55,7 +55,9 @@ export const Track = (): JSX.Element | null => {
     <>
       <div>
         <ErrorBoundary fallback={<div>Failed to load comments. Try to refresh the page.</div>}>
-          <h3>曲詳細</h3>
+          <Typography variant="h4" component="h1" sx={{ fontWeight: "bold", flexGrow: 1, my: 2 }}>
+            曲詳細
+          </Typography>
           <Box>
             <TrackInfomation track={track} />
           </Box>
