@@ -35,7 +35,7 @@ const CreateList = (props: { item: ListItems }): JSX.Element => {
   const DefinitionDescription = (descriptionText: string | number | React.ReactNode): JSX.Element => {
     return (
       <ListItem component="div">
-        <ListItemText primary={descriptionText} />
+        <ListItemText primary={descriptionText} sx={{ wordBreak: "break-word" }} />
       </ListItem>
     );
   };

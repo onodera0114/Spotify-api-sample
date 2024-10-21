@@ -1,6 +1,6 @@
 import { TrackResponse } from "@/types/track";
 import { convertMs } from "@/utils/convertMs";
-import { Box, List, ListItem, ListItemButton, Stack, Typography } from "@mui/material";
+import { Box, List, ListItem, ListItemButton, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
@@ -9,6 +9,8 @@ type Props = {
 
 export const SearchTrackResult: React.FC<Props> = (props: Props): JSX.Element => {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { trackResult } = props;
 
   return (
@@ -25,7 +27,7 @@ export const SearchTrackResult: React.FC<Props> = (props: Props): JSX.Element =>
                   <Typography variant="body1">{track.name}</Typography>
                   <Typography variant="body2">{track.artists.map((artist) => artist.name).join(", ")}</Typography>
                 </Stack>
-                <Typography>{`${convertMs(track.duration_ms).minutes}分${convertMs(track.duration_ms).seconds}秒`}</Typography>
+                {matches && <Typography>{`${convertMs(track.duration_ms).minutes}分${convertMs(track.duration_ms).seconds}秒`}</Typography>}
               </Stack>
             </ListItemButton>
           </ListItem>
