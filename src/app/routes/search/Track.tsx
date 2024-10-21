@@ -1,11 +1,11 @@
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { Typography } from "@mui/material";
+import { debounce } from "lodash";
 import { SearchTrackForm } from "@/features/search/components/track/SearchTrackForm";
 import { SearchTrackResult } from "@/features/search/components/track/SearchTrackResult";
-import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchCatalog } from "@/features/search/api/searchCatalog";
 import { useIntersection } from "@/hooks/useIntersection";
 import { Loading } from "@/components/layouts/Loading";
-import { debounce } from "lodash";
 
 const options = {
   rootMargin: "0px",
