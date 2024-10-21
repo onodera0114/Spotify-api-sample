@@ -45,6 +45,7 @@ export const searchCatalog = async ({
   if (offset) {
     queryParams.push(`offset=${offset}`);
   }
+  queryParams.push("market=JP");
 
   const { data } = await api.get<SearchResponse>(`/v1/search?${queryParams.join("&")}`, config);
 
@@ -54,7 +55,7 @@ export const searchCatalog = async ({
 export const searchCatalogQueryOptions = (
   query: string,
   type: "track" | "album" | "artist" | "playlist",
-  limit: number,
+  limit: number = 10,
   offset: number = 0,
   max: number = 50
 ): UseInfiniteQueryOptions<SearchResponse, Error, InfiniteData<SearchResponse, unknown>, SearchResponse, QueryKey, number> => {
@@ -67,35 +68,36 @@ export const searchCatalogQueryOptions = (
       switch (type) {
       case "album":
         if (lastPage.albums?.items && lastPage.albums?.items.length < max && lastPage.albums.next) {
-          return lastPage.albums?.items.length / limit + limit;
+          return lastPage.albums?.items.length / limit + 1;
         }
         break;
       case "artist":
         if (lastPage.artists?.items && lastPage.artists?.items.length < max && lastPage.artists.next) {
-          return lastPage.artists?.items.length / limit + limit;
+          return lastPage.artists?.items.length / limit + 1;
         }
         break;
       case "track":
         if (lastPage.tracks?.items && lastPage.tracks?.items.length < max && lastPage.tracks.next) {
-          return lastPage.tracks?.items.length / limit + limit;
+          return lastPage.tracks?.items.length / limit + 1;
         }
         break;
       case "playlist":
         if (lastPage.playlists?.items && lastPage.playlists?.items.length < max && lastPage.playlists.next) {
-          return lastPage.playlists?.items.length / limit + limit;
+          return lastPage.playlists?.items.length / limit + 1;
         }
         break;
       }
       return undefined;
     },
     initialPageParam: 1,
+    enabled: !!query,
   });
 };
 
 type UseSearchCatalogOptions = {
   query: string;
   type: "track" | "album" | "artist" | "playlist";
-  limit: number;
+  limit?: number;
   offset?: number;
   max?: number;
   queryConfig?: QueryConfig<typeof searchCatalogQueryOptions>;

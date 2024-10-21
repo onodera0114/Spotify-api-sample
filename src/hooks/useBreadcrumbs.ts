@@ -1,5 +1,5 @@
 import { BreadcrumbItem } from "@/components/ui/navigations/Breadcrumbs";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 type BreadcrumbsHooks = {
@@ -7,11 +7,10 @@ type BreadcrumbsHooks = {
 };
 
 export const useBreadcrumbs = (): BreadcrumbsHooks => {
-  const [breadcrumbItem, setBreadcrumbItem] = useState<BreadcrumbItem[]>([]);
   const location = useLocation();
   const { trackId } = useParams();
 
-  const createBreadcrumbItem = (): BreadcrumbItem[] => {
+  const breadcrumbItem = useMemo((): BreadcrumbItem[] => {
     const result: BreadcrumbItem[] = [];
     if (location.pathname.includes("/track")) {
       result.push({
@@ -40,10 +39,6 @@ export const useBreadcrumbs = (): BreadcrumbsHooks => {
       });
     }
     return result;
-  };
-
-  useEffect(() => {
-    setBreadcrumbItem(createBreadcrumbItem());
   }, [location.pathname]);
 
   return { breadcrumbItem };
