@@ -1,10 +1,19 @@
 import { Input } from "@/components/ui/forms/Input";
+import { Stack } from "@mui/material";
 
-export const SearchTrackForm = (): JSX.Element => {
+type Props = {
+  updateTrackName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  updateArtistName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export const SearchTrackForm: React.FC<Props> = (props: Props): JSX.Element => {
+  const { updateTrackName, updateArtistName } = props;
   return (
     <>
-      <Input label="曲名" variant="outlined" />
-      <Input label="アーティスト名" variant="outlined" />
+      <Stack spacing={2}>
+        <Input label="曲名" variant="outlined" onChange={updateTrackName} />
+        <Input label="アーティスト名" variant="outlined" onChange={updateArtistName} />
+      </Stack>
     </>
   );
 };
