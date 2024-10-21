@@ -25,10 +25,18 @@ export default [
       indent: ["error", 2], // インデントが一致しない場合にエラーにする
       semi: ["error", "always"], // 末尾にセミコロンがない場合にエラーにする
       quotes: ["error", "double"], // シングルクォーテーションでエラー
-      "no-unused-vars": "error", // 使用していない変数などがある場合にエラーにする
       "@typescript-eslint/no-explicit-any": "error", // anyがある場合にエラーにする
       "@typescript-eslint/explicit-function-return-type": "error", // 関数の戻り値の型がない場合にエラーにする
       "@typescript-eslint/explicit-module-boundary-types": "error", // コンポーネントの型が指定されていない場合にエラーにする
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_",
+          "destructuredArrayIgnorePattern": "^_"
+        }
+      ]
     },
     settings: {
       react: {
