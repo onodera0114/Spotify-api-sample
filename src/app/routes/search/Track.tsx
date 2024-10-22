@@ -1,5 +1,5 @@
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { debounce } from "lodash";
 import { SearchTrackForm } from "@/features/search/components/track/SearchTrackForm";
 import { SearchTrackResult } from "@/features/search/components/track/SearchTrackResult";
@@ -64,17 +64,14 @@ export const SearchTrack = (): JSX.Element | null => {
       </Typography>
       <Typography sx={{ mb: 4 }}>最大50件まで表示されます。</Typography>
       <SearchTrackForm updateTrackName={updateTrackName} updateArtistName={updateArtistName} />
-      <>
-        {searchResult?.pages.map(
-          (data, index) =>
-            searchResult?.pages.length - 1 === index && (
-              <Fragment key={index}>
-                <SearchTrackResult key={index} trackResult={data.tracks?.items ?? []} />
-                <div ref={ref}></div>
-              </Fragment>
-            )
-        )}
-      </>
+      <Box sx={{ mt: 4 }}>
+        {searchResult?.pages.map((data, index) => (
+          <Fragment key={index}>
+            <SearchTrackResult key={index} trackResult={data.tracks?.items ?? []} />
+            <div ref={ref}></div>
+          </Fragment>
+        ))}
+      </Box>
       {searchCatalogQuery.isLoading && <Loading />}
     </>
   );
