@@ -9,5 +9,5 @@ export const queryConfig = {
   },
 } satisfies DefaultOptions;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type QueryConfig<T extends (...args: any[]) => any> = Omit<ReturnType<T>, "queryKey" | "queryFn">;
