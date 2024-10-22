@@ -4,7 +4,6 @@ import { useParams, LoaderFunctionArgs } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 
 import { getTrackQueryOptions, useTrack } from "@/features/track/api/getTrack";
-import { TrackResponse } from "@/types/track";
 import { getTrackAudioFeaturesOptions, useTrackAudioFeatures } from "@/features/track/api/getTrackAudioFeatures";
 import { TrackInfomation } from "@/features/track/components/TrackInfomation";
 import { Loading } from "@/components/layouts/Loading";
@@ -12,7 +11,7 @@ import { FeaturesInfomation } from "@/features/track/components/FeaturesInfomati
 
 export const trackLoader =
   (queryClient: QueryClient) =>
-    async ({ params }: LoaderFunctionArgs): Promise<TrackResponse | unknown> => {
+    async ({ params }: LoaderFunctionArgs): Promise<unknown> => {
       const trackId = params.trackId as string;
 
       const trackQuery = getTrackQueryOptions(trackId);

@@ -54,6 +54,17 @@ export const createAppRouter = (queryClient: QueryClient): ReturnType<typeof cre
             return trackLoader(queryClient)(args);
           },
         },
+        {
+          path: "artist/:artistId",
+          lazy: async (): Promise<{ Component: React.ComponentType<Record<string, unknown>> }> => {
+            const { Artist } = await import("@/app/routes/Artist");
+            return { Component: Artist };
+          },
+          loader: async (args: LoaderFunctionArgs): Promise<unknown> => {
+            const { artistLoader } = await import("@/app/routes/Artist");
+            return artistLoader(queryClient)(args);
+          },
+        },
       ],
     },
     {
