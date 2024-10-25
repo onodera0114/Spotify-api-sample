@@ -16,13 +16,11 @@ export const searchCatalog = async ({
   query,
   type,
   limit,
-  page,
   offset = 0,
 }: {
   query: string;
   type: "track" | "album" | "artist" | "playlist";
   limit: number;
-  page: number;
   offset?: number;
 }): Promise<SearchResponse> => {
   const accessToken = localStorage.getItem("token");
@@ -40,7 +38,7 @@ export const searchCatalog = async ({
     queryParams.push(`type=${type}`);
   }
   if (limit) {
-    queryParams.push(`limit=${limit * page}`);
+    queryParams.push(`limit=${limit}`);
   }
   if (offset) {
     queryParams.push(`offset=${offset}`);
@@ -62,28 +60,28 @@ export const searchCatalogQueryOptions = (
   return infiniteQueryOptions({
     queryKey: ["search", query, type] as QueryKey,
     queryFn: ({ pageParam = 1 }) => {
-      return searchCatalog({ query, type, limit, page: pageParam as number, offset });
+      return searchCatalog({ query, type, limit, offset: offset + ((pageParam as number) - 1) * limit });
     },
     getNextPageParam: (lastPage) => {
       switch (type) {
       case "album":
-        if (lastPage.albums?.items && lastPage.albums?.items.length < max && lastPage.albums.next) {
-          return lastPage.albums?.items.length / limit + 1;
+        if (lastPage.albums?.items && lastPage.albums.offset + lastPage.albums.limit < max && lastPage.albums.next) {
+          return (lastPage.albums.offset + lastPage.albums.limit) / lastPage.albums.limit + 1;
         }
         break;
       case "artist":
-        if (lastPage.artists?.items && lastPage.artists?.items.length < max && lastPage.artists.next) {
-          return lastPage.artists?.items.length / limit + 1;
+        if (lastPage.artists?.items && lastPage.artists.offset + lastPage.artists.limit < max && lastPage.artists.next) {
+          return (lastPage.artists.offset + lastPage.artists.limit) / lastPage.artists.limit + 1;
         }
         break;
       case "track":
-        if (lastPage.tracks?.items && lastPage.tracks?.items.length < max && lastPage.tracks.next) {
-          return lastPage.tracks?.items.length / limit + 1;
+        if (lastPage.tracks?.items && lastPage.tracks.offset + lastPage.tracks.limit < max && lastPage.tracks.next) {
+          return (lastPage.tracks.offset + lastPage.tracks.limit) / lastPage.tracks.limit + 1;
         }
         break;
       case "playlist":
-        if (lastPage.playlists?.items && lastPage.playlists?.items.length < max && lastPage.playlists.next) {
-          return lastPage.playlists?.items.length / limit + 1;
+        if (lastPage.playlists?.items && lastPage.playlists.offset + lastPage.playlists.limit < max && lastPage.playlists.next) {
+          return (lastPage.playlists.offset + lastPage.playlists.limit) / lastPage.playlists.limit + 1;
         }
         break;
       }
