@@ -11,7 +11,7 @@ export const getArtistAlbums = async (artistId = ""): Promise<ArtistAlbumsRespon
       Authorization: `Bearer ${accessToken}`,
     },
   };
-  const { data } = await api.get<ArtistAlbumsResponse>(`/v1/artists/${artistId}/albums`, config);
+  const { data } = await api.get<ArtistAlbumsResponse>(`/v1/artists/${artistId}/albums?limit=50&market=JP`, config);
 
   return data;
 };
