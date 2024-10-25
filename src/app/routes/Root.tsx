@@ -1,7 +1,7 @@
 import { Header } from "@/components/layouts/Header";
 import { Breadcrumbs } from "@/components/ui/navigations/Breadcrumbs";
 import { Box } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 
 export const Root = (): JSX.Element => {
@@ -14,6 +14,7 @@ export const Root = (): JSX.Element => {
         <Breadcrumbs breadcrumbItem={breadcrumbItem} />
         <Outlet />
       </Box>
+      <ScrollRestoration />
     </>
   );
 };

@@ -1,12 +1,16 @@
 import { FetchQueryOptions, QueryClient, QueryKey } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { useParams, LoaderFunctionArgs } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Loading } from "@/components/layouts/Loading";
 import { getArtistQueryOptions, useArtist } from "@/features/artist/api/getArtist";
 import { getArtistAlbumsQueryOptions, useArtistAlbums } from "@/features/artist/api/getArtistAlbums";
 import { getArtistTopTracksQueryOptions, useArtistTopTracks } from "@/features/artist/api/getArtistTopTracks";
 import { getRelatedArtistsQueryOptions, useRelatedArtists } from "@/features/artist/api/getRelatedArtistsResponse";
+import { ArtistInfomation } from "@/features/artist/components/ArtistInfomation";
+import { ArtistTopTracks } from "@/features/artist/components/ArtistTopTracks";
+import { RelatedArtists } from "@/features/artist/components/RelatedArtists";
+import { ArtistAlbums } from "@/features/artist/components/ArtistAlbums";
 
 export const artistLoader =
   (queryClient: QueryClient) =>
@@ -70,6 +74,18 @@ export const Artist = (): JSX.Element | null => {
           <Typography variant="h4" component="h1" sx={{ fontWeight: "bold", flexGrow: 1, my: 2 }}>
             アーティスト詳細
           </Typography>
+          <Box>
+            <ArtistInfomation artist={artist} />
+          </Box>
+          <Box sx={{ mt: 6 }}>
+            <ArtistAlbums artistAlbums={artistAlbums.items} />
+          </Box>
+          <Box sx={{ mt: 6 }}>
+            <ArtistTopTracks artistTopTracks={artistTopTracks.tracks} />
+          </Box>
+          <Box sx={{ mt: 6 }}>
+            <RelatedArtists relatedArtists={relatedArtists.artists} />
+          </Box>
         </ErrorBoundary>
       </div>
     </>

@@ -19,7 +19,7 @@ export const SearchTrackResult: React.FC<Props> = (props: Props): JSX.Element =>
         <ListItem key={track.id} component="li" disablePadding>
           <ListItemButton onClick={() => navigate(`/track/${track.id}`)}>
             <Stack spacing={2} direction="row" sx={{ flexGrow: 1, alignItems: "center" }}>
-              <Box style={{ textAlign: "center" }}>
+              <Box style={{ textAlign: "center", minWidth: "64px" }}>
                 <img src={track.album.images[0].url} alt="" style={{ width: "64px", height: "64px" }} />
               </Box>
               <Stack sx={{ flexGrow: 1, textAlign: "left" }}>

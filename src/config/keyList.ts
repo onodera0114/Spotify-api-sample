@@ -182,3 +182,34 @@ export const audioFeaturesKeyList: ListItems[] = [
       "推定された拍子記号です。\n拍子記号（メーター）は、各小節にいくつの拍が含まれているかを指定する表記の規則です。拍子記号は3から7までの範囲で表されます。",
   },
 ];
+
+export const artistKeyList: ListItems[] = [
+  {
+    key: "name",
+    teamText: "アーティスト名",
+    descriptionText: "",
+  },
+  {
+    key: "id",
+    teamText: "id",
+    descriptionText: "",
+  },
+  {
+    key: "genres",
+    teamText: "ジャンル",
+    descriptionText: "",
+  },
+  {
+    key: "followers",
+    teamText: "フォロワー数",
+    descriptionText: "",
+  },
+  {
+    key: "popularity",
+    teamText: "人気度",
+    descriptionText: "",
+    noteTitle: "人気度とは？",
+    noteText:
+      "0~100の数値で表され、100に近いほど人気が高いことを示します。\nアーティストの人気度は、アーティストのすべてのトラックの人気から計算されます。",
+  },
+];
