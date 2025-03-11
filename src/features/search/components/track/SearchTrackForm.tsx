@@ -11,8 +11,8 @@ export const SearchTrackForm: React.FC<Props> = (props: Props): JSX.Element => {
   return (
     <>
       <Stack spacing={2}>
-        <Input label="曲名" variant="outlined" onChange={updateTrackName} />
-        <Input label="アーティスト名" variant="outlined" onChange={updateArtistName} />
+        <Input id="track" label="曲名" variant="outlined" onChange={updateTrackName} />
+        <Input id="artist" label="アーティスト名" variant="outlined" onChange={updateArtistName} />
       </Stack>
     </>
   );
