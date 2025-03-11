@@ -22,7 +22,7 @@ export const MenuLists = (): JSX.Element => {
     {
       icon: MicIcon,
       text: "アーティスト検索",
-      route: "",
+      route: "/search/artist",
     },
     {
       icon: StarIcon,

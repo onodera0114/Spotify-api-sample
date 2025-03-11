@@ -1,5 +1,6 @@
-import { Playlist } from "./playlist";
-import { Album, SimplifiedArtist, TrackResponse } from "./track";
+import { ArtistResponse } from "@/types/artist";
+import { Playlist } from "@/types/playlist";
+import { Album, TrackResponse } from "@/types/track";
 
 /**
  * 検索結果を表すオブジェクト
@@ -43,7 +44,7 @@ export type SearchResponse = {
     total: number;
   };
   artists?: {
-    items: SimplifiedArtist[];
+    items: ArtistResponse[];
     limit: number;
     next: string | null;
     offset: number;

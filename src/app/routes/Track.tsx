@@ -4,10 +4,10 @@ import { useParams, LoaderFunctionArgs } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 
 import { getTrackQueryOptions, useTrack } from "@/features/track/api/getTrack";
-import { getTrackAudioFeaturesOptions, useTrackAudioFeatures } from "@/features/track/api/getTrackAudioFeatures";
+// import { getTrackAudioFeaturesOptions, useTrackAudioFeatures } from "@/features/track/api/getTrackAudioFeatures";
 import { TrackInfomation } from "@/features/track/components/TrackInfomation";
 import { Loading } from "@/components/layouts/Loading";
-import { FeaturesInfomation } from "@/features/track/components/FeaturesInfomation";
+// import { FeaturesInfomation } from "@/features/track/components/FeaturesInfomation";
 
 export const trackLoader =
   (queryClient: QueryClient) =>
@@ -15,19 +15,19 @@ export const trackLoader =
       const trackId = params.trackId as string;
 
       const trackQuery = getTrackQueryOptions(trackId);
-      const trackAudioFeaturesQuery = getTrackAudioFeaturesOptions(trackId);
+      // const trackAudioFeaturesQuery = getTrackAudioFeaturesOptions(trackId);
 
       const promises = [
         queryClient.getQueryData(trackQuery.queryKey as QueryKey) ?? (await queryClient.fetchQuery(trackQuery as FetchQueryOptions)),
-        queryClient.getQueryData(trackAudioFeaturesQuery.queryKey as QueryKey) ??
-        (await queryClient.fetchQuery(trackAudioFeaturesQuery as FetchQueryOptions)),
+      // queryClient.getQueryData(trackAudioFeaturesQuery.queryKey as QueryKey) ??
+      //   (await queryClient.fetchQuery(trackAudioFeaturesQuery as FetchQueryOptions)),
       ] as const;
 
-      const [track, trackAudioFeatures] = await Promise.all(promises);
+      const [track] = await Promise.all(promises);
 
       return {
         track,
-        trackAudioFeatures,
+      // trackAudioFeatures,
       };
     };
 
@@ -37,18 +37,18 @@ export const Track = (): JSX.Element | null => {
   const trackQuery = useTrack({
     trackId,
   });
-  const trackAudioFeaturesQuery = useTrackAudioFeatures({
-    trackId,
-  });
+  // const trackAudioFeaturesQuery = useTrackAudioFeatures({
+  //   trackId,
+  // });
 
-  if (trackQuery.isLoading && trackAudioFeaturesQuery.isLoading) {
+  if (trackQuery.isLoading) {
     return <Loading />;
   }
 
   const track = trackQuery.data;
-  const audioFeatures = trackAudioFeaturesQuery.data;
+  // const audioFeatures = trackAudioFeaturesQuery.data;
 
-  if (!track || !audioFeatures) return null;
+  if (!track) return null;
 
   return (
     <>
@@ -60,9 +60,9 @@ export const Track = (): JSX.Element | null => {
           <Box>
             <TrackInfomation track={track} />
           </Box>
-          <Box sx={{ mt: 6 }}>
+          {/* <Box sx={{ mt: 6 }}>
             <FeaturesInfomation features={audioFeatures} />
-          </Box>
+          </Box> */}
         </ErrorBoundary>
       </div>
     </>
