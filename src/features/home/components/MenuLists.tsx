@@ -17,7 +17,7 @@ export const MenuLists = (): JSX.Element => {
     {
       icon: AlbumIcon,
       text: "アルバム検索",
-      route: "",
+      route: "/search/album",
     },
     {
       icon: MicIcon,

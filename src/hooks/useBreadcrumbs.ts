@@ -8,7 +8,7 @@ type BreadcrumbsHooks = {
 
 export const useBreadcrumbs = (): BreadcrumbsHooks => {
   const location = useLocation();
-  const { trackId, artistId } = useParams();
+  const { trackId, artistId, albumId } = useParams();
 
   const breadcrumbItem = useMemo((): BreadcrumbItem[] => {
     const result: BreadcrumbItem[] = [];
@@ -51,6 +51,27 @@ export const useBreadcrumbs = (): BreadcrumbsHooks => {
           },
           {
             text: "アーティスト詳細",
+          }
+        );
+      }
+    } else if (location.pathname.includes("/album")) {
+      result.push({
+        text: "ホーム",
+        path: "/",
+      });
+      if (location.pathname.includes("/search")) {
+        result.push({
+          text: "アルバム検索",
+        });
+      }
+      if (albumId) {
+        result.push(
+          {
+            text: "アルバム検索",
+            path: "/search/album",
+          },
+          {
+            text: "アルバム詳細",
           }
         );
       }
