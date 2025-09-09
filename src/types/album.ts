@@ -35,7 +35,7 @@ export type AlbumResponse = {
   type: "album";
   uri: string;
   artists: SimplifiedArtist[];
-  tracks: Tracks;
+  tracks: AlbumTracks;
   copyrights: Copyright[];
   external_ids: ExternalId;
   genresd: string[];
@@ -43,7 +43,7 @@ export type AlbumResponse = {
   popularity: number;
 };
 
-export type Tracks = {
+export type AlbumTracks = {
   items: TrackResponse[];
   limit: number;
   next: string | null;
