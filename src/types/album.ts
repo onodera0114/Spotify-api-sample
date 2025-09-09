@@ -1,4 +1,4 @@
-import { ExternalUrl, Image, SimplifiedArtist } from "@/types/track";
+import { ExternalId, ExternalUrl, Image, SimplifiedArtist, TrackResponse } from "@/types/track";
 
 /**
  * Album
@@ -18,7 +18,7 @@ import { ExternalUrl, Image, SimplifiedArtist } from "@/types/track";
  * @property {string} uri - アルバムのSpotify URI。
  * @property {SimplifiedArtist[]} artists - アルバムを演奏したアーティスト。
  */
-export type Album = {
+export type AlbumResponse = {
   album_type: "album" | "single" | "compilation";
   total_tracks: number;
   available_markets: string[];
@@ -35,4 +35,24 @@ export type Album = {
   type: "album";
   uri: string;
   artists: SimplifiedArtist[];
+  tracks: Tracks;
+  copyrights: Copyright[];
+  external_ids: ExternalId;
+  genresd: string[];
+  label: string;
+  popularity: number;
+};
+
+export type Tracks = {
+  items: TrackResponse[];
+  limit: number;
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  total: number;
+};
+
+export type Copyright = {
+  text: string;
+  type: string;
 };

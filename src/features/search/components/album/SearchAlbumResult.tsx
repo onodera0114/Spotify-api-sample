@@ -1,4 +1,4 @@
-import { Album } from "@/types/album";
+import { Album } from "@/types/track";
 import { Box, List, ListItem, ListItemButton, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 

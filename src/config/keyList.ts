@@ -213,3 +213,77 @@ export const artistKeyList: ListItems[] = [
       "0~100の数値で表され、100に近いほど人気が高いことを示します。\nアーティストの人気度は、アーティストのすべてのトラックの人気から計算されます。",
   },
 ];
+
+export const albumKeyList: ListItems[] = [
+  {
+    key: "name",
+    teamText: "アルバム名",
+    descriptionText: "",
+  },
+  {
+    key: "artists",
+    teamText: "アーティスト",
+    descriptionText: "",
+  },
+  {
+    key: "id",
+    teamText: "id",
+    descriptionText: "",
+  },
+  {
+    key: "release_date",
+    teamText: "リリース日",
+    descriptionText: "",
+  },
+  {
+    key: "type",
+    teamText: "種類",
+    descriptionText: "",
+    noteText: "album、single、compilationのどれかの値をとります",
+  },
+  {
+    key: "popularity",
+    teamText: "人気度",
+    descriptionText: "",
+    noteTitle: "人気度とは？",
+    noteText:
+      "0~100の数値で表され、100に近いほど人気が高いことを示します。\n人気度はアルゴリズムによって計算され、ほとんどの場合、そのトラックの総再生回数と、それらの再生がどのくらい新しいかに基づいています。\n一般的には、過去にたくさん再生された曲よりも、現在たくさん再生されている曲の方が人気が高くなります。重複トラック（シングルとアルバムの同じトラックなど）は独立して評価されます。アーティストとアルバムの人気度は、トラックの人気度から数学的に導き出されます。\n注：人気の値は実際の人気より数日遅れることがあります：値はリアルタイムで更新されません。",
+  },
+  {
+    key: "available_markets",
+    teamText: "利用可能な地域",
+    descriptionText: "",
+  },
+  {
+    key: "isrc",
+    teamText: "ISRC",
+    descriptionText: "",
+    noteTitle: "ISRCとは？",
+    noteText:
+      "「International Standard Recording Code」の略称で、日本語では「国際標準レコーディングコード」といいます。\nレコーディング（オーディオレコーディング／音楽ビデオレコーディング）の識別に利用される唯一の国際標準コードで、1つのレコーディングは1つのISRCで識別されます。\n一度付番したISRCを変更することはできません。",
+  },
+  {
+    key: "ean",
+    teamText: "EAN",
+    descriptionText: "",
+    noteTitle: "EANとは？",
+    noteText: "「European article number」の略称で、「イアンコード」と読みます。\nヨーロッパで統一されている13桁で構成される商品コードのことです。",
+  },
+  {
+    key: "upc",
+    teamText: "UPC",
+    descriptionText: "",
+    noteTitle: "UPCとは？",
+    noteText: "「Universal Product Code」の略称で、カナダ、アメリカで統一されている商品コードのことです。",
+  },
+  {
+    key: "label",
+    teamText: "ラベル",
+    descriptionText: "",
+  },
+  {
+    key: "copyrights",
+    teamText: "Copyrights",
+    descriptionText: "",
+  },
+];
